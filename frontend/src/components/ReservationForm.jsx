@@ -44,7 +44,7 @@ const ReservationForm = () => {
   };
 
   return (
-    <section id="reservations" className="py-16 bg-white px-6 md:px-20">
+    <section id="reservations" className="py-16 bg-white px-6 md:px-20 scroll-mt-32">
       <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-8 items-start">
         
         {/* Reservation Form */}

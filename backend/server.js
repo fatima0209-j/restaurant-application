@@ -1,52 +1,35 @@
-// const express = require('express');
-// const cors = require('cors');
-// const mongoose = require('mongoose');
-// require('dotenv').config();
+import dotenv from "dotenv";
+import express from "express";
+import mongoose from "mongoose";
+import cors from "cors";
+import path from "path";
+import { fileURLToPath } from "url";
 
-// const app = express();
-// app.use(cors());
-// app.use(express.json());
+import adminRoutes from "./src/routes/adminRoutes.js";
+import reservationRoutes from "./src/routes/reservationRoutes.js";
+import dishesRoutes from "./src/routes/dishesRoutes.js";
 
-// // MongoDB Connection
-// const MONGO_URI = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/restaurantapp';
-
-// mongoose
-//   .connect(MONGO_URI, {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true
-//   })
-//   .then(() => console.log('Connected to MongoDB'))
-//   .catch((err) => console.error('❌ MongoDB connection error:', err));
-
-// // Start server
-// const PORT = process.env.PORT || 5000;
-// const reservationRoutes = require('./src/routes/reservationRoutes');
-// app.use('/api/reservations', reservationRoutes);
-
-// app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
-
-
-
-
-require('dotenv').config();
-const express = require('express');
-const mongoose = require('mongoose');
-const cors = require('cors');
-const path = require('path');
-
-const adminRoutes = require(path.join(__dirname, 'src', 'routes', 'adminRoutes'));
-const reservationRoutes = require(path.join(__dirname, 'src', 'routes', 'reservationRoutes'));
-
+dotenv.config();
 const app = express();
+
+// Helpers for __dirname in ES modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 app.use(cors());
 app.use(express.json());
 
-mongoose.connect(process.env.MONGO_URI)
-  .then(() => console.log('MongoDB connected'))
-  .catch(err => console.error(err));
+// Serve uploaded images statically
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
-app.use('/api/admin', adminRoutes);
-app.use('/api/reservations', reservationRoutes);
+mongoose
+  .connect(process.env.MONGO_URI)
+  .then(() => console.log("MongoDB connected"))
+  .catch((err) => console.error(err));
+
+app.use("/api/admin", adminRoutes);
+app.use("/api/reservations", reservationRoutes);
+app.use("/api/dishes", dishesRoutes);
 
 app.listen(process.env.PORT, () => {
   console.log(`Server running on port ${process.env.PORT}`);

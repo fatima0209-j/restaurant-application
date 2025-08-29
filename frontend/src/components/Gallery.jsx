@@ -25,7 +25,7 @@ const Gallery = () => {
   }, []);
 
   return (
-    <section id="gallery" className="py-16 bg-gray-50">
+    <section id="gallery" className="py-16 bg-gray-50 scroll-mt-32">
       <div className="text-center mb-10">
         <h2 className="text-4xl font-bold text-orange-700">Our Spanish Cuisine</h2>
         <p className="text-gray-600 mt-2">Delight your eyes before your taste buds</p>

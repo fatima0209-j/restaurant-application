@@ -3,7 +3,7 @@ import logo from '../assets/images/logo.png'; // your logo path
 
 const Header = () => {
   return (
-    <header className="fixed top-0 left-0 w-full z-50 bg-white shadow-sm">
+    <header className="fixed top-0 left-0 w-full z-50 bg-white shadow-sm scroll-mt-32">
       <div className="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
         
         {/* Logo + Name */}
